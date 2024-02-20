@@ -4,7 +4,9 @@ import axios from "axios";
 import Model from "../components/Modal";
 import Input from "../components/Input";
 import LableField from "../components/LableField";
+// import Dropdown from "../components/Dropdwon";
 
+const itemPage = 5
 const Dashboard = () => {
   const [user, setUser] = useState([]);    // State variables for get method
   const header = ["NAME", "EMAIL", "GENDER", "STATUS"];    //table header show details
@@ -14,6 +16,7 @@ const Dashboard = () => {
     gender: " ",
     status: " ",
   });
+
   const [id, setId] = useState();
   const [show, setShow] = useState(false);   //add show state
   const [editShow, setEditShow] = useState(false);  //edit show state
@@ -31,7 +34,6 @@ const Dashboard = () => {
     console.log(val,"......................")
     setId(val.id);
   };
-
   const handelChange = (e) => {
     setInputValues({ ...inputValues, [e.target.name]: e.target.value }); //e.target.value
     // console.log(inputValues);
@@ -39,6 +41,7 @@ const Dashboard = () => {
   const editHandleChange = (e) => {
     setInputValues({ ...inputValues, [e.target.name]: e.target.value });
   };
+  
   const getValue = () => {
     axios
       .get("https://gorest.co.in/public/v2/users", {
@@ -104,10 +107,11 @@ const Dashboard = () => {
   })
   .then(() => {
     getValue()
+    alert("success ....")
     })
   }
   return (
-    <div>
+    <div className="card my-5 me-3">
       <Table
         type="text"
         // onChangeInput={mddd} //search bar
@@ -235,5 +239,4 @@ const Dashboard = () => {
     </div>
   );
 };
-
 export default Dashboard;
